@@ -1,0 +1,154 @@
+$color-dark: #000;
+$color-blue: rgb(100,255,255);
+$color-glow: rgba(100,200,255,0.75);
+
+@mixin grid($blockcolor, $linecolor, $linewidth, $linespread) {
+  // from : https://codepen.io/scrimothy/pen/pyDre
+  $spread: ($linewidth + $linespread) / 2;
+  background-color: $blockcolor;
+  background-image: linear-gradient(0deg, transparent 0px, $linecolor $linewidth, transparent $spread), linear-gradient(90deg, transparent 0px, $linecolor $linewidth, transparent $spread);
+}
+
+body {
+  background-color: lighten($color-dark, 10%);
+}
+
+#board-cont {
+  width: 500px;
+  height: 500px;
+  margin: 25px auto;
+}
+
+canvas {
+  position:absolute;
+}
+
+#game {
+  background:transparent;
+  border-color: lighten($color-blue, 10%);
+  box-shadow: 0 0 20px 5px $color-glow;
+  display: block;
+  z-index:1;
+}
+
+#particle {
+  @include grid(black, $color-blue, 2px, 6px)
+  background-size: 25px 25px;
+  // background: white;
+  z-index: 0;
+}
+
+#buttons {
+  list-style: none;
+  display:flex;
+  flex-wrap: nowrap;
+  margin:0;
+  padding:0;
+  li {
+    display:flex;
+    width:33%;
+  }
+  button {
+    width:100%;
+    border-radius: 25px;
+    line-height:1.2em;
+    padding:12px;
+    font-size:1.3em;
+    background-color: $color-dark;
+    border: 1px solid $color-dark;
+    border-top-color: lighten($color-dark, 15%);
+    border-right-color: lighten($color-dark, 25%);
+    border-bottom-color: lighten($color-dark, 25%);
+    border-left-color: lighten($color-dark, 15%);
+    color:lighten($color-dark, 50%);
+    &:hover, &:active {
+      color: $color-blue;
+      border-color: lighten($color-blue, 10%);
+      box-shadow: 0 0 20px 0 $color-glow;
+    }
+    &:focus {outline:0;}
+  }
+}
+
+//keys adapted from: https://codepen.io/tholex/pen/rgBcn
+
+.movement {
+  display:flex;
+  vertical-align: bottom;
+  text-align: right;
+  padding-right: 5px;
+  > div {
+    flex: 1;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h2, .key {
+    color:lighten($color-dark, 50%);
+  }
+}
+
+.key {
+  background-color: $color-dark;
+  border: 1px solid $color-dark;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  padding: 3px 2px;
+  height: 30px;
+  letter-spacing: 0.5px;
+  flex: 1;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &::before {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    content: '';
+  }
+}
+
+.movement .directions {
+  width:50%;
+  max-width: 300px;
+  display: flex;
+  flex: 4;
+  justify-content: justify;
+  align-items: flex-end;
+  padding-bottom: 4px;
+
+  .up-down {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+
+    .key {
+      margin: 0;
+    }
+    .key + .key {
+      border-top-left-radius: 1px;
+      border-top-right-radius: 1px;
+    }
+  }
+
+  .key {
+    flex: 1;
+    font-size: 10px;
+    height: 27px;
+  }
+}
+
+.movement .letters .directions .key {
+  font-size:20px;
+}
+
+.blank {
+  background:transparent;
+  border:none;
+}
