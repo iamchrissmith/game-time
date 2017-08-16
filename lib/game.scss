@@ -14,8 +14,8 @@ body {
 }
 
 #board-cont {
-  width: 500px;
-  height: 500px;
+  width: 750px;
+  height: 750px;
   margin: 25px auto;
 }
 
@@ -112,6 +112,11 @@ canvas {
     height: 100%;
     content: '';
   }
+}
+.key.active {
+  color: $color-blue;
+  border-color: lighten($color-blue, 10%);
+  box-shadow: 0 0 20px 0 $color-glow;
 }
 
 .movement .directions {
